@@ -18,6 +18,17 @@ use Charcoal\Adapters\GMP\BigInteger;
 class BigIntegerTests extends \PHPUnit\Framework\TestCase
 {
     /**
+     * Testing behaviour when object of BigNumber is directly treated as a string value
+     * @return void
+     */
+    public function testAsString(): void
+    {
+        $bN = new BigInteger(0xfffe);
+        $this->assertEquals("65534", strval($bN));
+        $this->assertEquals(5, strlen($bN));
+    }
+
+    /**
      * @return void
      */
     public function testValueAsInt(): void
