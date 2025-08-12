@@ -1,14 +1,12 @@
 <?php
-/*
- * This file is a part of "charcoal-dev/gmp-adapter" package.
- * https://github.com/charcoal-dev/gmp-adapter
- *
- * Copyright (c) Furqan A. Siddiqui <hello@furqansiddiqui.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code or visit following link:
- * https://github.com/charcoal-dev/gmp-adapter/blob/master/LICENSE
+/**
+ * Part of the "charcoal-dev/gmp-adapter" package.
+ * @link https://github.com/charcoal-dev/gmp-adapter
  */
+
+declare(strict_types=1);
+
+namespace Charcoal\Adapters\GMP\Tests;
 
 use Charcoal\Adapters\GMP\BigInteger;
 
@@ -18,14 +16,14 @@ use Charcoal\Adapters\GMP\BigInteger;
 class BigIntegerTests extends \PHPUnit\Framework\TestCase
 {
     /**
-     * Testing behaviour when object of BigNumber is directly treated as a string value
+     * Testing behaviour when an object of BigNumber is directly treated as a string value
      * @return void
      */
     public function testAsString(): void
     {
         $bN = new BigInteger(0xfffe);
         $this->assertEquals("65534", strval($bN));
-        $this->assertEquals(5, strlen($bN));
+        $this->assertEquals(5, strlen((string)$bN));
     }
 
     /**
