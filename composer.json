@@ -21,11 +21,11 @@
       "Charcoal\\Adapters\\GMP\\": [
         "src"
       ]
-    },
-    "autoload-dev": {
-      "psr-4": {
-        "Charcoal\\Adapters\\GMP\\Tests\\": "tests/"
-      }
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Charcoal\\Adapters\\GMP\\Tests\\": "tests/"
     }
   },
   "minimum-stability": "dev"
