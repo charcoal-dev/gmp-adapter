@@ -1,18 +1,14 @@
 <?php
-/*
- * This file is a part of "charcoal-dev/gmp-adapter" package.
- * https://github.com/charcoal-dev/gmp-adapter
- *
- * Copyright (c) Furqan A. Siddiqui <hello@furqansiddiqui.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code or visit following link:
- * https://github.com/charcoal-dev/gmp-adapter/blob/master/LICENSE
+/**
+ * Part of the "charcoal-dev/gmp-adapter" package.
+ * @link https://github.com/charcoal-dev/gmp-adapter
  */
 
 declare(strict_types=1);
 
 namespace Charcoal\Adapters\GMP;
+
+use Charcoal\Adapters\GMP\Contracts\BuffersBridgeInterface;
 
 /**
  * Class BigIntegerCodecs
@@ -20,22 +16,13 @@ namespace Charcoal\Adapters\GMP;
  */
 abstract class BigIntegerCodecs implements \Stringable
 {
-    /** @var \GMP */
     protected readonly \GMP $int;
 
-    /**
-     * @param int|string|\GMP $n
-     */
     public function __construct(int|string|\GMP $n)
     {
         $this->int = $this->getGMPn($n);
     }
 
-    /**
-     * @param string $encodedStr
-     * @param \Charcoal\Adapters\GMP\CustomBaseCharset $base
-     * @return static
-     */
     public static function fromCustomBase(string $encodedStr, CustomBaseCharset $base): static
     {
         if (!$base->caseSensitive) {
@@ -55,10 +42,6 @@ abstract class BigIntegerCodecs implements \Stringable
         return new static($value);
     }
 
-    /**
-     * @param \Charcoal\Adapters\GMP\CustomBaseCharset $base
-     * @return string
-     */
     public function toCustomBase(CustomBaseCharset $base): string
     {
         if (!$this->isUnsigned()) {
@@ -84,10 +67,6 @@ abstract class BigIntegerCodecs implements \Stringable
         return $encoded;
     }
 
-    /**
-     * @param string $hex
-     * @return static
-     */
     public static function fromBase16(string $hex): static
     {
         // Validate string as Hexadecimal
@@ -108,9 +87,6 @@ abstract class BigIntegerCodecs implements \Stringable
         return new static(gmp_init($hex, 16));
     }
 
-    /**
-     * @return string
-     */
     public function toBase16(): string
     {
         $b16 = gmp_strval($this->int, 16);
@@ -121,34 +97,21 @@ abstract class BigIntegerCodecs implements \Stringable
         return $b16;
     }
 
-    /**
-     * @param \Charcoal\Adapters\GMP\BuffersBridgeInterface $buffer
-     * @return static
-     */
     public static function fromBuffer(BuffersBridgeInterface $buffer): static
     {
         return new static(gmp_init($buffer->toBase16(), 16));
     }
 
-    /**
-     * @return string
-     */
     public function __toString(): string
     {
         return $this->toString();
     }
 
-    /**
-     * @return string
-     */
     public function toString(): string
     {
         return gmp_strval($this->int, 10);
     }
 
-    /**
-     * @return int
-     */
     public function toInt(): int
     {
         if ($this->cmp(PHP_INT_MAX) > 0) {
@@ -160,18 +123,11 @@ abstract class BigIntegerCodecs implements \Stringable
         return gmp_intval($this->int);
     }
 
-    /**
-     * @return \GMP
-     */
     public function toGMP(): \GMP
     {
         return $this->int;
     }
 
-    /**
-     * @param int|string|\Charcoal\Adapters\GMP\BigInteger|\Charcoal\Adapters\GMP\BuffersBridgeInterface|\GMP $n
-     * @return \GMP
-     */
     protected function getGMPn(int|string|self|BuffersBridgeInterface|\GMP $n): \GMP
     {
         if ($n instanceof \GMP) {
@@ -186,6 +142,7 @@ abstract class BigIntegerCodecs implements \Stringable
             if (preg_match('/^(0|-?[1-9][0-9]+)$/', $n)) {
                 return gmp_init($n, 10);
             } elseif (preg_match('/^(0x)?[a-f0-9]+$/i', $n)) {
+                $n = preg_replace('/^0x/i', "", $n);
                 return gmp_init($n, 16);
             }
 
