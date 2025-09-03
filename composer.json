@@ -14,18 +14,19 @@
   ],
   "require": {
     "php": "^8.3",
-    "ext-gmp": "*"
+    "ext-gmp": "*",
+    "charcoal-dev/contracts": "^0.1.4"
   },
   "autoload": {
     "psr-4": {
-      "Charcoal\\Adapters\\GMP\\": [
+      "Charcoal\\Adapters\\Gmp\\": [
         "src"
       ]
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Charcoal\\Adapters\\GMP\\Tests\\": "tests/"
+      "Charcoal\\Adapters\\Gmp\\Tests\\": "tests/"
     }
   },
   "minimum-stability": "dev"

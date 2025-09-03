@@ -6,9 +6,9 @@
 
 declare(strict_types=1);
 
-namespace Charcoal\Adapters\GMP\Tests;
+namespace Charcoal\Adapters\Gmp\Tests;
 
-use Charcoal\Adapters\GMP\BigInteger;
+use Charcoal\Adapters\Gmp\BigInteger;
 
 /**
  * Class BigIntegerTests
@@ -16,7 +16,7 @@ use Charcoal\Adapters\GMP\BigInteger;
 class BigIntegerTests extends \PHPUnit\Framework\TestCase
 {
     /**
-     * Testing behaviour when an object of BigNumber is directly treated as a string value
+     * Testing behavior when an object of BigNumber is directly treated as a string value
      * @return void
      */
     public function testAsString(): void

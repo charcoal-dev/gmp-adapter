@@ -6,11 +6,12 @@
 
 declare(strict_types=1);
 
-namespace Charcoal\Adapters\GMP;
+namespace Charcoal\Adapters\Gmp\BaseConvert;
 
 /**
- * Class CustomBaseCharset
- * @package Charcoal\Adapters\GMP
+ * This class is used to define a character set with an optional
+ * case sensitivity flag. The length of the character set is
+ * calculated upon instantiation.
  */
 readonly class CustomBaseCharset
 {
