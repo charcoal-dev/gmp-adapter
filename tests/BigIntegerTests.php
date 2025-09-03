@@ -69,7 +69,7 @@ class BigIntegerTests extends \PHPUnit\Framework\TestCase
         $bN = new BigInteger(PHP_INT_MAX); // 9223372036854775807
         $bN = $bN->add(PHP_INT_MAX); // 18446744073709551614
 
-        // string(99) "O:32:"Charcoal\Adapters\GMP\BigInteger":1:{s:6:" * int";O:3:"GMP":1:{i:0;s:16:"fffffffffffffffe";}}"
+        // string(99) "O:32:"Charcoal\Adapters\Gmp\BigInteger":1:{s:6:" * int";O:3:"GMP":1:{i:0;s:16:"fffffffffffffffe";}}"
         $ser = serialize($bN);
 
         /** @var BigInteger $bN2 */
