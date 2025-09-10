@@ -15,13 +15,13 @@ final readonly class BigIntHelper
 {
     /**
      * Check if a value is within the range; accepts int|strings (any GMP supported base)
-     * Guarantees that values falling within the allowed range will be returned as a GMP object.
+     * Values falling within the allowed range will be returned as a GMP object.
      */
     public static function inRange(int|string|\GMP $value, int|string|\GMP $min, int|string|\GMP $max): false|\GMP
     {
-        $value = $value instanceof \GMP ? $value : gmp_init($value, 10);
-        $min = $min instanceof \GMP ? $min : gmp_init($min, 10);
-        $max = $max instanceof \GMP ? $max : gmp_init($max, 10);
+        $value = $value instanceof \GMP ? $value : gmp_init($value);
+        $min = $min instanceof \GMP ? $min : gmp_init($min);
+        $max = $max instanceof \GMP ? $max : gmp_init($max);
         if (gmp_cmp($min, $max) > 0) {
             throw new \InvalidArgumentException("Minimum value must be less than maximum value");
         }
